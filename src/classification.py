@@ -1,3 +1,4 @@
+#%%
 from zipfile import ZipFile
 # # system tools
 import os
@@ -22,8 +23,8 @@ import pickle
 
 # %%
 #unzipping data folder
-#zip = ZipFile('../data/stock_market.zip')
-#zip.extractall("../in/") 
+zip = ZipFile('../data/stock_market.zip')
+zip.extractall("../in/") 
 
 #%%
 #loads the data and splits it into train and test
