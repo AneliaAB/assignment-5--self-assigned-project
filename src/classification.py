@@ -25,13 +25,15 @@ import pickle
 #zip = ZipFile('../../data/stock_market.zip')
 #zip.extractall("../data/") 
 
+def clean_data():
+    
 #%%
 #loads the data and splits it into train and test
 def prepare_data():
     #load data
-    data = pd.read_csv(os.path.join("..","in","fake_or_real_news.csv"), index_col=0)
-    X = data["text"]
-    y = data["label"]
+    data = pd.read_csv(os.path.join("..","data","stock_data.csv"), index_col=0)
+    X = data["Text"]
+    y = data["Sentiment"]
 
     #split into test and train 
     X_train, X_test, y_train, y_test = train_test_split(X,           
