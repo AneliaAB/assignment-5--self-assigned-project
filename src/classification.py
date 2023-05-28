@@ -59,7 +59,7 @@ def train_classifier():
     X_test_feats = vectorizer.transform(X_test)
 
     #Initiate report and prediction 
-    classifier = MLPClassifier(activation = "logistic",
+    classifier = MLPClassifier(activation = "relu",
                            hidden_layer_sizes = (20,),
                            max_iter=1000,
                            random_state = 42)
@@ -84,15 +84,29 @@ def classification_report():
 
     X_train_feats = loaded_vectorizer.fit_transform(X_train)
     X_test_feats = loaded_vectorizer.transform(X_test)
-    
-    feature_names = loaded_vectorizer.get_feature_names_out()
 
     y_pred = loaded_model.predict(X_test_feats)
     classifier_metrics = metrics.classification_report(y_test, y_pred)
 
     #save classification report
-    text_file = open("../out/classification_report.txt", "w")
+    text_file = open("../out/classification_report_relu.txt", "w")
     n = text_file.write(classifier_metrics)
     text_file.close()
 # %%
 classification_report()
+
+# %%
+#generates a prediction based on prompt
+def classify_sentance():
+    # load the vectorizer
+    loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
+
+    # load the model
+    loaded_model = pickle.load(open('../models/classification.model', 'rb'))
+
+    sentence = input("Write a sentance to generate lable with Neural Network classifier: ")
+    test_sentence = loaded_vectorizer.transform([sentence])
+    print(loaded_model.predict(test_sentence))
+
+# %%
+classify_sentance()
