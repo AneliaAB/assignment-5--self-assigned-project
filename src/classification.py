@@ -23,14 +23,14 @@ import pickle
 
 # %%
 #unzipping data folder
-zip = ZipFile('../data/stock_market.zip')
-zip.extractall("../in/") 
+#zip = ZipFile('../data/stock_market.zip')
+#zip.extractall("../in/") 
 
 #%%
 #loads the data and splits it into train and test
 def prepare_data():
     #load data
-    data = pd.read_csv(os.path.join("..","in","stock_data.csv"), index_col=0)
+    data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
     X = data["Text"]
     y = data["Sentiment"] 
 
@@ -66,8 +66,8 @@ def train_classifier():
 
     classifier.fit(X_train_feats, y_train)
 
-    pickle.dump(classifier, open('../models/neural_network/classification.model', 'wb'))
-    pickle.dump(vectorizer, open('../models/neural_network/vectorizer.pickle', 'wb'))
+    pickle.dump(classifier, open('../models/classification.model', 'wb'))
+    pickle.dump(vectorizer, open('../models/vectorizer.pickle', 'wb'))
 
 #%%
 train_classifier()
@@ -79,8 +79,8 @@ def classification_report():
     X_train, X_test, y_train, y_test = prepare_data()
 
     #load vectorizer and model
-    loaded_vectorizer = pickle.load(open('../models/neural_network/vectorizer.pickle', 'rb'))
-    loaded_model = pickle.load(open('../models/neural_network/classification.model', 'rb'))
+    loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
+    loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
     X_train_feats = loaded_vectorizer.fit_transform(X_train)
     X_test_feats = loaded_vectorizer.transform(X_test)
@@ -91,7 +91,7 @@ def classification_report():
     classifier_metrics = metrics.classification_report(y_test, y_pred)
 
     #save classification report
-    text_file = open("../out/neural_network/classification_report.txt", "w")
+    text_file = open("../out/classification_report.txt", "w")
     n = text_file.write(classifier_metrics)
     text_file.close()
 # %%
