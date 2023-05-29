@@ -62,7 +62,8 @@ def train_classifier():
 
     #Initiate report and prediction 
     classifier = MLPClassifier(activation = "relu",
-                           hidden_layer_sizes = (20,),
+                               solver="sgd",
+                           hidden_layer_sizes = (15,),
                            max_iter=1000,
                            random_state = 42)
 
@@ -92,10 +93,11 @@ def train_classifier():
     plt.legend(loc="best")
     plt.grid(True)
     
-    plt.savefig("../out/loss_accuracy_curve.png", format="png") # specify filetype explicitly
+    plt.savefig("../out/loss_accuracy_curve_sgd.png", format="png") # specify filetype explicitly
     plt.show()
 
     plt.close()
+    
 
 #%%
 train_classifier()
