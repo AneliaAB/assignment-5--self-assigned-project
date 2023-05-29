@@ -1,12 +1,16 @@
 #%%
+#handling text
 import spacy
+from spacy import displacy
+#data handling and visualization
 import pandas as pd
 import os
-import pickle
-from spacy import displacy
 import numpy as np
 import matplotlib.pyplot as plt
+#saving and loading models
+import pickle
 
+#%%
 #%%
 df = pd.read_csv(os.path.join("..", "data", "stocks.tsv"), sep="\t")
 
@@ -14,7 +18,6 @@ symbols = df.Symbol.tolist()
 companies = df.CompanyName.tolist()
 print (symbols[:10])
 
-#%%
 stops = ["two"]
 nlp = spacy.blank("en")
 ruler = nlp.add_pipe("entity_ruler")
@@ -32,25 +35,22 @@ ruler.add_patterns(patterns)
 
 #%%
 def create_corpus():
-     data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
+    data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
     corpus = []
 
     for ind in data.index:
         text = data['Text'][ind]
         corpus.append(text)   
+    
+    return corpus
+
 #%%
 def extract_stock():
     #load vectorizer and model
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
     loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
-    #create corpus
-    data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
-    corpus = []
-
-    for ind in data.index:
-        text = data['Text'][ind]
-        corpus.append(text)
+    corpus = create_corpus()
 
     sentiments = []
     stock = input("Name: ")
@@ -76,9 +76,6 @@ def extract_stock():
     joined_array = np.concatenate(sentiments)
     return joined_array
 
-#%%
-#extract_stock()
-
 # %%
 def create_df():
     sentiments = extract_stock().tolist()
@@ -92,7 +89,6 @@ def create_df():
     plt.ylabel('Count')
 
     # Show the plot
-    plt.savefig('sentiment_distribution.png')
+    plt.savefig('../out/sentiment_distribution.png')
 
 create_df()
-# %%
