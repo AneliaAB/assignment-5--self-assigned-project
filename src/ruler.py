@@ -26,29 +26,49 @@ for company in companies:
 ruler.add_patterns(patterns)
 
 #%%
-data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
-corpus = []
+def extract_stock():
+    #create corpus from data
+    data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
+    corpus = []
 
-for ind in data.index:
-    text = data['Text'][ind]
-    corpus.append(text)
+    for ind in data.index:
+        text = data['Text'][ind]
+        corpus.append(text)
+
+    #%%
+    #extract stock name from text
+    for text in corpus:
+        doc = nlp(text)
+
+        for ent in doc.ents:
+            entity = ent.text
+            lable = ent.label_
+    
+    loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
+
+    # load the model
+    loaded_model = pickle.load(open('../models/classification.model', 'rb'))
+
+    for text in corpus:
+        test_sentence = loaded_vectorizer.transform([text])
+        print(loaded_model.predict(test_sentence))
 
 #%%
-doc = nlp(text)
-
-for ent in doc.ents:
-    print (ent.text, ent.label_)
+extract_stock()
 
 # %%
 #generates a prediction based on prompt
 def classify_sentance():
+    entity, lable = extract_stock()
+
     # load the vectorizer
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
 
     # load the model
     loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
-    sentence = input("Write a sentance to generate lable with Neural Network classifier: ")
+    for 
+    tweet = input("Write a sentance to generate lable with Neural Network classifier: ")
     test_sentence = loaded_vectorizer.transform([sentence])
     print(loaded_model.predict(test_sentence))
 
