@@ -62,8 +62,7 @@ def train_classifier():
 
     #Initiate report and prediction 
     classifier = MLPClassifier(activation = "relu",
-                               solver="sgd",
-                           hidden_layer_sizes = (15,),
+                           hidden_layer_sizes = (20,),
                            max_iter=1000,
                            random_state = 42)
 
@@ -71,33 +70,6 @@ def train_classifier():
 
     pickle.dump(classifier, open('../models/classification.model', 'wb'))
     pickle.dump(vectorizer, open('../models/vectorizer.pickle', 'wb'))
-
-    # Generate the learning curve
-    train_sizes, train_scores, val_scores = learning_curve(classifier, X_train_feats, y_train, cv=5, train_sizes=np.linspace(0.1, 1.0, 10))
-
-    # Calculate the mean and standard deviation of the training and validation scores
-    train_scores_mean = np.mean(train_scores, axis=1)
-    train_scores_std = np.std(train_scores, axis=1)
-    val_scores_mean = np.mean(val_scores, axis=1)
-    val_scores_std = np.std(val_scores, axis=1)
-
-    # Plot the learning curve
-    plt.figure(figsize=(8, 6))
-    plt.plot(train_sizes, train_scores_mean, 'o-', color="r", label="Training score")
-    plt.plot(train_sizes, val_scores_mean, 'o-', color="g", label="Validation score")
-    plt.fill_between(train_sizes, train_scores_mean - train_scores_std, train_scores_mean + train_scores_std, alpha=0.1, color="r")
-    plt.fill_between(train_sizes, val_scores_mean - val_scores_std, val_scores_mean + val_scores_std, alpha=0.1, color="g")
-    plt.xlabel("Training examples")
-    plt.ylabel("Score")
-    plt.title("Learning Curve")
-    plt.legend(loc="best")
-    plt.grid(True)
-    
-    plt.savefig("../out/loss_accuracy_curve_sgd.png", format="png") # specify filetype explicitly
-    plt.show()
-
-    plt.close()
-    
 
 #%%
 train_classifier()
@@ -139,5 +111,5 @@ def classify_sentance():
     print(loaded_model.predict(test_sentence))
 
 # %%
-#classify_sentance()
+classify_sentance()
 #NKD looking like a good short. Failed to break price level resistance at 116 today yealds a negative sentiment

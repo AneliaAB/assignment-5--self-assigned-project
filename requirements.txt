@@ -1,1 +1,6 @@
 zipfile36
+pandas
+numpy
+scikit-learn
+matplotlib
+spacy
