@@ -23,15 +23,15 @@ for company in companies:
     if company not in stops:
         patterns.append({"label": "COMPANY", "pattern": company})
 
+ruler.add_patterns(patterns)
 
 #%%
 data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
+corpus = []
 
-data
-
-#%%
-text = data.iloc[2]["Text"]
-text
+for ind in data.index:
+    text = data['Text'][ind]
+    corpus.append(text)
 
 #%%
 doc = nlp(text)
