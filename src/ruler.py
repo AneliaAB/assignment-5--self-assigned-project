@@ -1,6 +1,8 @@
 #%%
 import spacy
 import pandas as pd
+import os
+import pickle
 
 #%%
 df = pd.read_csv(os.path.join("..", "data", "stocks.tsv"), sep="\t")
@@ -49,9 +51,12 @@ def extract_stock():
     # load the model
     loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
+    stock = input("Name of stock or company: ")
+    
     for text in corpus:
-        test_sentence = loaded_vectorizer.transform([text])
-        print(loaded_model.predict(test_sentence))
+        if stock in text:
+            test_sentence = loaded_vectorizer.transform([text])
+            print(loaded_model.predict(test_sentence))
 
 #%%
 extract_stock()
@@ -67,7 +72,6 @@ def classify_sentance():
     # load the model
     loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
-    for 
     tweet = input("Write a sentance to generate lable with Neural Network classifier: ")
     test_sentence = loaded_vectorizer.transform([sentence])
     print(loaded_model.predict(test_sentence))
