@@ -31,13 +31,6 @@ for company in companies:
 ruler.add_patterns(patterns)
 
 #%%
-def gather_input():
-    stock = input("Name: ")
-    label = input("Type: ")
-
-    return stock, label 
-
-#%%
 def extract_stock():
     #load vectorizer and model
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
@@ -50,12 +43,11 @@ def extract_stock():
     for ind in data.index:
         text = data['Text'][ind]
         corpus.append(text)
-    
-    #generate stock/company name
-    stock, label = gather_input()
 
     sentiments = []
+    stock = input("Name: ")
     
+    stock_texts = []
     for text in corpus:
         doc = nlp(text)
 
@@ -64,14 +56,18 @@ def extract_stock():
             lable = ent.label_
         
             if entity == stock in text:
-                if lable == lable.upper():
-                    displacy.render(doc, style="ent")
-                    test_sentence = loaded_vectorizer.transform([text])
-            
-                    sentiment = loaded_model.predict(test_sentence)
-                    sentiments.append(sentiment)
+                stock_texts.append(text)
+                test_sentence = loaded_vectorizer.transform([text])
+        
+                sentiment = loaded_model.predict(test_sentence)
+                sentiments.append(sentiment)
+    
+    combined_text = " ".join(stock_texts)
+    doc = nlp(combined_text)
+    displacy.serve(doc, style="ent")
     joined_array = np.concatenate(sentiments)
     return joined_array
+
 #%%
 extract_stock()
 
@@ -90,5 +86,5 @@ def create_df():
     # Show the plot
     plt.savefig('plot.png')
 
-create_df()
+#create_df()
 # %%
