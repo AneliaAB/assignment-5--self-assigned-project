@@ -16,7 +16,6 @@ df = pd.read_csv(os.path.join("..", "data", "stocks.tsv"), sep="\t")
 
 symbols = df.Symbol.tolist()
 companies = df.CompanyName.tolist()
-print (symbols[:10])
 
 stops = ["two"]
 nlp = spacy.blank("en")
@@ -72,7 +71,7 @@ def extract_stock():
     
     combined_text = " ".join(stock_texts)
     doc = nlp(combined_text)
-    displacy.serve(doc, style="ent")
+    displacy.serve(doc, style="ent", auto_select_port=True)
     joined_array = np.concatenate(sentiments)
     return joined_array
 
