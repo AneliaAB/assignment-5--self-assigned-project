@@ -81,7 +81,14 @@ def create_df():
     labels = ["positive", "negative"]
 
     values = [sentiments.count(1), sentiments.count(-1)]
-    plt.bar(labels, values).figure.savefig("../out/visualizing_dataframe.png", dpi=300, bbox_inches='tight')
+    plt.bar(labels, values)
+
+    plt.title('Distribution of positive and negative sentiment')
+    plt.xlabel('Sentiment')
+    plt.ylabel('Count')
+
+    # Show the plot
+    plt.savefig('plot.png')
 
 create_df()
 # %%
