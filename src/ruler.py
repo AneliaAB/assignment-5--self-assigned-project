@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import pickle
 
 #%%
-#%%
+#Generating the spacy nlp to use in generate_sentiments()
 df = pd.read_csv(os.path.join("..", "data", "stocks.tsv"), sep="\t")
 
 symbols = df.Symbol.tolist()
@@ -44,24 +44,23 @@ def create_corpus():
     return corpus
 
 #%%
-def extract_stock():
+def generate_sentiments():
     #load vectorizer and model
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
     loaded_model = pickle.load(open('../models/classification.model', 'rb'))
 
     corpus = create_corpus()
-
-    sentiments = []
-    stock = input("Name: ")
+    sentiments = [] #empty array to push sentiments into
+    stock = input("Name of stock or company: ") #user-generated prompt
     
-    stock_texts = []
+    stock_texts = [] #empty array to push text (tweets) into
+
+    #looping over tweets to extract sentiment based on user-generated promt
     for text in corpus:
         doc = nlp(text)
-
         for ent in doc.ents:
             entity = ent.text
             lable = ent.label_
-        
             if entity == stock in text:
                 stock_texts.append(text)
                 test_sentence = loaded_vectorizer.transform([text])
@@ -71,17 +70,17 @@ def extract_stock():
     
     combined_text = " ".join(stock_texts)
     doc = nlp(combined_text)
-    displacy.serve(doc, style="ent", auto_select_port=True)
-    joined_array = np.concatenate(sentiments)
+    displacy.serve(doc, style="ent", auto_select_port=True) #displayng texts in seperate window
+    joined_array = np.concatenate(sentiments) #concatenating sentiment array
     return joined_array
 
 # %%
-def create_df():
-    sentiments = extract_stock().tolist()
-    labels = ["positive", "negative"]
+def sentiment_analysis():
+    sentiments = generate_sentiments().tolist() #numpy array to list
+    labels = ["positive", "negative"] #sentiment score 1=positive; 2=negative
 
     values = [sentiments.count(1), sentiments.count(-1)]
-    plt.bar(labels, values)
+    plt.bar(labels, values) #generating plot
 
     plt.title('Distribution of positive and negative sentiment')
     plt.xlabel('Sentiment')
@@ -90,4 +89,4 @@ def create_df():
     # Show the plot
     plt.savefig('../out/sentiment_distribution.png')
 
-create_df()
+sentiment_analysis()
