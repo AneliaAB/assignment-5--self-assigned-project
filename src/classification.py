@@ -91,25 +91,8 @@ def classification_report():
     classifier_metrics = metrics.classification_report(y_test, y_pred)
 
     #save classification report
-    text_file = open("../out/classification_report_relu.txt", "w")
+    text_file = open("../out/classification_report.txt", "w")
     n = text_file.write(classifier_metrics)
     text_file.close()
 # %%
 classification_report()
-
-# %%
-#generates a prediction based on prompt
-def classify_sentance():
-    # load the vectorizer
-    loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
-
-    # load the model
-    loaded_model = pickle.load(open('../models/classification.model', 'rb'))
-
-    sentence = input("Write a sentance to generate lable with Neural Network classifier: ")
-    test_sentence = loaded_vectorizer.transform([sentence])
-    print(loaded_model.predict(test_sentence))
-
-# %%
-classify_sentance()
-#NKD looking like a good short. Failed to break price level resistance at 116 today yealds a negative sentiment

@@ -31,6 +31,14 @@ for company in companies:
 ruler.add_patterns(patterns)
 
 #%%
+def create_corpus():
+     data = pd.read_csv(os.path.join("..","in","stock_data.csv"))
+    corpus = []
+
+    for ind in data.index:
+        text = data['Text'][ind]
+        corpus.append(text)   
+#%%
 def extract_stock():
     #load vectorizer and model
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
@@ -69,7 +77,7 @@ def extract_stock():
     return joined_array
 
 #%%
-extract_stock()
+#extract_stock()
 
 # %%
 def create_df():
@@ -84,7 +92,7 @@ def create_df():
     plt.ylabel('Count')
 
     # Show the plot
-    plt.savefig('plot.png')
+    plt.savefig('sentiment_distribution.png')
 
-#create_df()
+create_df()
 # %%
