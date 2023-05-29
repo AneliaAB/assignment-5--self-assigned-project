@@ -68,6 +68,7 @@ def train_classifier():
 
     classifier = classifier.fit(X_train_feats, y_train)
 
+    #saves classifier and vectorizer
     pickle.dump(classifier, open('../models/classification.model', 'wb'))
     pickle.dump(vectorizer, open('../models/vectorizer.pickle', 'wb'))
 
