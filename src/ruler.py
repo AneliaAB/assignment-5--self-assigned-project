@@ -4,6 +4,8 @@ import pandas as pd
 import os
 import pickle
 from spacy import displacy
+import numpy as np
+import matplotlib.pyplot as plt
 
 #%%
 df = pd.read_csv(os.path.join("..", "data", "stocks.tsv"), sep="\t")
@@ -29,6 +31,13 @@ for company in companies:
 ruler.add_patterns(patterns)
 
 #%%
+def gather_input():
+    stock = input("Name: ")
+    label = input("Type: ")
+
+    return stock, label 
+
+#%%
 def extract_stock():
     #load vectorizer and model
     loaded_vectorizer = pickle.load(open('../models/vectorizer.pickle', 'rb'))
@@ -43,9 +52,9 @@ def extract_stock():
         corpus.append(text)
     
     #generate stock/company name
-    stock = input("Name: ")
-    lable = input("Type: ")
-    
+    stock, label = gather_input()
+
+    sentiments = []
     
     for text in corpus:
         doc = nlp(text)
@@ -59,32 +68,20 @@ def extract_stock():
                     displacy.render(doc, style="ent")
                     test_sentence = loaded_vectorizer.transform([text])
             
-                    print(loaded_model.predict(test_sentence))
-
+                    sentiment = loaded_model.predict(test_sentence)
+                    sentiments.append(sentiment)
+    joined_array = np.concatenate(sentiments)
+    return joined_array
 #%%
 extract_stock()
 
 # %%
-def create_df(path_to_folder):
-    filenames = os.listdir(path_to_folder)
+def create_df():
+    sentiments = extract_stock().tolist()
+    labels = ["positive", "negative"]
 
-    categories = []
-    for filename in filenames:
-        if path_to_folder == "../data/bleached_corals":
-            categories.append(0)
-        else:
-            categories.append(1)
+    values = [sentiments.count(1), sentiments.count(-1)]
+    plt.bar(labels, values).figure.savefig("../out/visualizing_dataframe.png", dpi=300, bbox_inches='tight')
 
-    df = pd.DataFrame({
-        'filename': filenames,
-        'category': categories
-    })
-    
-    return df
-
-healthy_df = create_df("../data/healthy_corals")
-bleached_df = create_df("../data/bleached_corals")
-
-df = pd.concat([bleached_df, healthy_df])
-df_plt = df["category"].replace({0: 'bleached', 1: 'healthy'}).value_counts().plot.bar() 
-df_plt.figure.savefig("../out/visualizing_dataframe.png", dpi=300, bbox_inches='tight') # specify filetype explicitly
+create_df()
+# %%
