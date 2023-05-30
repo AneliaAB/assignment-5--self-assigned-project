@@ -26,7 +26,7 @@ This script is inspired by Mattingly, 2023. The Jupyter Notebook can be found vi
 2. Navigate from the root of your directory to ```assignment-5--self-assigned-project```
 3. Run the setup file, which will install all the requirements by writing ```bash setup.sh``` in the terminal
 
-**Run the script:** 
+**Run the script:** <br >
 4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project``` <br >
 5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal <br >
 6. Then apply the classifier to the data by writing ```python sentiments.py``` in the terminal
