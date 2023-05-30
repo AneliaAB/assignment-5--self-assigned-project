@@ -27,9 +27,9 @@ This script is inspired by Mattingly, 2023. The Jupyter Notebook can be found vi
 3. Run the setup file, which will install all the requirements by writing ```bash setup.sh``` in the terminal
 
 **Run the script:** <br >
-4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project``` <br >
-5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal <br >
-6. Then apply the classifier to the data by writing ```python sentiments.py``` in the terminal
+    4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project``` <br >
+    5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal <br >
+    6. Then apply the classifier to the data by writing ```python sentiments.py``` in the terminal
 - The user will be asked to provide a name of a stock or company that they wish to do sentiment analysis on. A possible answer is ‘Apple’ (company) or ‘APP’ (stock). You can already find examples in the out folder for Netflix and APP. <br >
 
 **IMPORTANT:** ```displacy.serve()``` starts a local web server that keeps running until you terminate it manually. To stop the server and regain control of the terminal, you can press ```Ctrl+C``` in most terminals. 
