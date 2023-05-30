@@ -20,13 +20,13 @@ The stock market data (stock_market.csv) is loaded into the script and the user 
 This script is inspired by Mattingly, 2023. The Jupyter Notebook can be found via this link: https://github.com/wjbmattingly/freecodecamp_ under the name ```03_01_stock_analysis.ipynb```.
 
 ## HOW TO INSTALL AND RUN THE PROJECT
-Installation:
+**Installation:**
 1. First you need to clone this repository. 
 - The datasets are uploaded to the repository, so you won’t need to load them separately
 2. Navigate from the root of your directory to ```assignment-5--self-assigned-project```
 3. Run the setup file, which will install all the requirements by writing ```bash setup.sh``` in the terminal
 
-**Run the script:** <br >
+**Run the script:** 
 4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project``` <br >
 5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal <br >
 6. Then apply the classifier to the data by writing ```python sentiments.py``` in the terminal
