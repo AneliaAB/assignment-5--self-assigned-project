@@ -4,7 +4,7 @@
 This project trains a classifier on a stock-news dataset gathered from multiple twitter handles regarding economic news. The data is labled with two sentiments: negative (-1) and positive (1) (Yash, 2020). The classifier is then used to generate sentiment analysis - a bar plot visualizing the distribution of positive and negative sentiments. This project allows the user to search through the data and find tweets about a certain stock or company. This can be useful in market analysis or tracking sentiment among users. The project can be applied to data from other platforms as well, as long as the data follows the same structure. It is important to note that the stock-market data (ibid.) is custom labelled, which leaves room for human error or bias. 
 
 **Data** 
-The stock-market data (Yash, 2020) can be found on Kaggle via this link: https://www.kaggle.com/datasets/yash612/stockmarket-sentiment-dataset 
+The stock-market data (Yash, 2020) can be found on Kaggle via this link: https://www.kaggle.com/datasets/yash612/stockmarket-sentiment-dataset <br >
 The stocks data (Mattingly, 2023) can be found in this GitHub repository in the folder ‘data’ under the name of ‘stocks.tsv’: https://github.com/wjbmattingly/freecodecamp_spacy 
 
 ## METHODS
@@ -17,7 +17,7 @@ This script is inspired by previous assignments from this class (particularly as
 The script begins by loading the ```stocks.tsv``` file and creating a list of patters that will be used by an entity ruler to recognize entities (stocks and companies). This will be used when displaying the text data with, in order to show where in the text a given company or stock is mentioned. 
 The stock market data (stock_market.csv) is loaded into the script and the user is asked to provide a name of a stock/company which they wish to do sentiment analysis on. A corpus is created comprised of tweets that mention the company/stock name that the user has provided. The classifier is applied on each tweet and a sentiment is given. The sentiment scores are counted using ```count()``` and a barplot is created in the ```out``` folder. The script also uses the ```displacy.serve()``` function provided by the ```spaCy``` library which displays a visualization of the classified entities in the corpus. You can view the visualization by opening the URL provided when running the script.
 
-This script is inspired by Mattingly, 2023. His Jupiter notebook can be found via this link: https://github.com/wjbmattingly/freecodecamp_ under the name ```03_01_stock_analysis.ipynb```.
+This script is inspired by Mattingly, 2023. The Jupyter Notebook can be found via this link: https://github.com/wjbmattingly/freecodecamp_ under the name ```03_01_stock_analysis.ipynb```.
 
 ## HOW TO INSTALL AND RUN THE PROJECT
 Installation:
@@ -27,8 +27,8 @@ Installation:
 3. Run the setup file, which will install all the requirements by writing ```bash setup.sh``` in the terminal
 
 **Run the script:** <br >
-4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project```
-5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal
+4. Navigate to the folder ```src``` by writing ```cd src``` in the terminal, assuming your current directory is ```assignment-5--self-assigned-project``` <br >
+5. First run the script that trains the classifier by writing ```python classification.py``` in the terminal <br >
 6. Then apply the classifier to the data by writing ```python sentiments.py``` in the terminal
 - The user will be asked to provide a name of a stock or company that they wish to do sentiment analysis on. A possible answer is ‘Apple’ (company) or ‘APP’ (stock). You can already find examples in the out folder for Netflix and APP. <br >
 
