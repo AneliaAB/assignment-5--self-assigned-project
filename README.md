@@ -3,7 +3,7 @@
 ## DESCRIPTION
 This project trains a classifier on a stock-news dataset gathered from multiple twitter handles regarding economic news. The data is labled with two sentiments: negative (-1) and positive (1) (Chaudhary, 2020). The classifier is then used to generate sentiment analysis - a bar plot visualizing the distribution of positive and negative sentiments. This project allows the user to search through the data and find tweets about a certain stock or company. This can be useful in market analysis or tracking sentiment among users. The project can be applied to data from other platforms as well, as long as the data follows the same structure. It is important to note that the stock-market data (ibid.) is custom labelled, which leaves room for human error or bias. 
 
-**Data** 
+**Data** <br >
 The stock-market data (Chaudhary, 2020) can be found on Kaggle via this link: https://www.kaggle.com/datasets/yash612/stockmarket-sentiment-dataset <br >
 The stocks data (Mattingly, 2023) can be found in this GitHub repository in the folder ‘data’ under the name of ‘stocks.tsv’: https://github.com/wjbmattingly/freecodecamp_spacy 
 
@@ -48,8 +48,6 @@ When the user generates a prompt word - name of a company or stock, which is als
 
 ## Referances
 Chaudhary, Y. (2020). <i>Stock-Market Sentiment Dataset</i> [Data set]. Kaggle. https://doi.org/10.34740/KAGGLE/DSV/1217821
-
-Hartmann, J. 2022 "Emotion English DistilRoBERTa-base". Availablee at: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base 
 
 Mattingly, W. (2023). wjbmattingly/freecodecamp_spacy. [online] GitHub. Available at: https://github.com/wjbmattingly/freecodecamp_spacy [Accessed 26 May 2023].
 
